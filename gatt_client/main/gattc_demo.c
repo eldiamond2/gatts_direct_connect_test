@@ -512,7 +512,7 @@ void gpio_config_func(void)
     gpio_config_t io_conf = {};
     io_conf.intr_type = GPIO_INTR_NEGEDGE;
     io_conf.mode = GPIO_MODE_INPUT;
-    io_conf.pin_bit_mask = ((1UL << BUT_RESET) | (1UL << BUT_BLE) | (1UL << BUT_RESET_HUB6));
+    io_conf.pin_bit_mask = ((1ULL << BUT_RESET) | (1ULL << BUT_BLE) | (1ULL << BUT_RESET_HUB6));
     io_conf.pull_down_en = GPIO_PULLDOWN_DISABLE;
     io_conf.pull_up_en = GPIO_PULLUP_ENABLE;
     gpio_config(&io_conf);
@@ -586,4 +586,6 @@ void app_main(void)
     if (local_mtu_ret){
         ESP_LOGE(GATTC_TAG, "set local  MTU failed, error code = %x", local_mtu_ret);
     }
+
+    return;
 }
