@@ -59,7 +59,7 @@
 
 #define INVALID_HANDLE   0
 
-static const char remote_device_name[] =    "ESP_GATTS_T2";
+static const char remote_device_name[] =    "ESP_GATTS_T3";
 #define TEST_DEVICE_NAME                    "ESP_GATTS_T1"
 
 static bool connect    = false;
@@ -618,7 +618,7 @@ static void gatts_multi_profile_event_handler(uint8_t profile, esp_gatts_cb_even
     case ESP_GATTS_WRITE_EVT: {
         ESP_LOGI(GATTS_TAG, "GATT_WRITE_EVT, conn_id %d, trans_id %d, handle %d", param->write.conn_id, param->write.trans_id, param->write.handle);
         if (!param->write.is_prep){
-            selectPresetSlot(esp_random() % 16);
+            selectPresetSlot(param->write.value[6]);
             ESP_LOGI(GATTS_TAG, "GATT_WRITE_EVT, value len %d, value :", param->write.len);
             esp_log_buffer_hex(GATTS_TAG, param->write.value, param->write.len);
             if (gls_profile_tab[profile].descr_handle == param->write.handle && param->write.len == 2){
